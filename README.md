@@ -1,3 +1,3 @@
 ## Requirements
 
-• [skinchanger](https://github.com/brouznouf/fivem-mysql-async)
+• [mysql-async](https://github.com/brouznouf/fivem-mysql-async)
