@@ -33,13 +33,13 @@ end
 RegisterNetEvent('copenservice')
 AddEventHandler('copenservice', function()
     ESX.Notification("Vous avez ~g~activé~s~ la vente de drogue.")
-    --ESX.DrawMissionText("~r~Vous êtes à la recherche de clients..", 900000000)
+    ESX.DrawMissionText("~r~Vous êtes à la recherche de clients..", 900000000)
     OnSellDrugs = true 
 end)
 
 RegisterNetEvent('cancelvente')
 AddEventHandler('cancelvente', function()
-    ESX.Notification("~r~Impossible de vendre pas assez de policiers en service.")
+    ESX.DrawMissionText("~r~Impossible de vendre pas assez de policiers en service.", 4000)
     OnSellDrugs = false
 end)
 
@@ -108,7 +108,7 @@ end
 
 local pedinteract = {   
     {
-        name = 'pedinteract',
+        name = 'etatveh',
         icon = 'fa-solid fa-cannabis',
         label = 'Proposer de la drogue',
         canInteract = function(entity, distance, coords, name, bone)
@@ -161,7 +161,7 @@ local pedinteract = {
                                 PlayAmbientSpeech1(pnj, 'GENERIC_HI', 'SPEECH_PARAMS_STANDARD')
     
                                 local chance = math.random(0, 100)
-                                if chance >= 14 and chance <= 28 then
+                                if chance >= 0 and chance <= 28 then
                                     chancecallpolice = math.random(1, 6)
                                     if chancecallpolice == 1 then
                                         TriggerServerEvent("call:makeCallSpecial", "police", GetEntityCoords(GetPlayerPed(-1)),"Deal en cours", "VenteDeDrogue")
@@ -206,16 +206,3 @@ local pedinteract = {
 }
 
 exports.ox_target:addGlobalPed(pedinteract)
-
-DensityMultiplier = 0.7
-DensityPedMultiplier = 1.0
-CreateThread(function()
-	while true do
-	    Wait(0)
-	    SetVehicleDensityMultiplierThisFrame(DensityMultiplier)
-	    SetPedDensityMultiplierThisFrame(DensityPedMultiplier)
-	    SetRandomVehicleDensityMultiplierThisFrame(DensityMultiplier)
-	    SetParkedVehicleDensityMultiplierThisFrame(DensityMultiplier)
-	    SetScenarioPedDensityMultiplierThisFrame(DensityPedMultiplier, DensityPedMultiplier)
-	end
-end)
